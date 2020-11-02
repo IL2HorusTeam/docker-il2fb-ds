@@ -1,8 +1,5 @@
-# il2fb-ds-docker
-
-
-docker-wine
-===========
+docker-il2fb-ds
+===============
 
 Docker image of the dedicated server of «IL-2 Sturmovik: Forgotten Battles» flight simulator.
 
