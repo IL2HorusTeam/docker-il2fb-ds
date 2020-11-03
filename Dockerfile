@@ -3,9 +3,15 @@ FROM alpine AS build
 RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/2.04/server-2.04.zip \
  && mkdir /il2ds \
  && unzip server-2.04.zip -d /il2ds \
- && mkdir /il2ds/logs \
- && mkdir /il2ds/conf \
- && mkdir /il2ds/scripts
+ && rm -f \
+      /il2ds/confc.ini \
+      /il2ds/confs.ini \
+      /il2ds/gc.cmd \
+      /il2ds/server.cmd \
+ && mkdir \
+      /il2ds/logs \
+      /il2ds/conf \
+      /il2ds/scripts
 
 COPY conf/*    /il2ds/conf/
 COPY scripts/* /il2ds/scripts/
@@ -13,12 +19,14 @@ COPY scripts/* /il2ds/scripts/
 
 FROM il2horusteam/wine:5.0
 
-ARG IL2DSUID=21000
-ARG IL2DSGID=21000
+ARG IL2DS_UID=21000
+ARG IL2DS_GID=21000
 
-ENV IL2DSHOME="/il2ds"
-ENV WINEPREFIX="$IL2DSHOME/.wine32"
+ENV WINEPREFIX="/il2ds/.wine32"
 ENV WINEDEBUG="-all"
+
+ENV IL2DS_CONF="/il2ds/conf/confs.ini"
+ENV IL2DS_INIT="/il2ds/scripts/init.cmd"
 
 LABEL org.opencontainers.image.version="2.04"
 LABEL org.opencontainers.image.source="https://github.com/IL2HorusTeam/il2fb-ds-docker/tree/2.04/"
@@ -28,36 +36,36 @@ LABEL org.opencontainers.image.url="https://hub.docker.com/r/il2horusteam/il2ds"
 LABEL org.opencontainers.image.description="Dedicated server of «IL-2 Sturmovik: Forgotten Battles» flight simulator"
 LABEL org.opencontainers.image.authors="Oleksandr Oblovatnyi <oblovatniy@gmail.com>"
 
-COPY --from=build /il2ds "$IL2DSHOME"
+COPY --from=build /il2ds /il2ds
 
-RUN groupadd -g $IL2DSGID il2ds \
+RUN groupadd -g $IL2DS_GID il2ds \
  && useradd \
       --system \
-      -u $IL2DSUID \
-      -g $IL2DSGID \
+      -u $IL2DS_UID \
+      -g $IL2DS_GID \
       -G wine \
       --shell /sbin/nologin \
-      --home-dir "$IL2DSHOME" \
+      --home-dir /il2ds \
       il2ds \
  && rm -rf /home/wine/.wine32 \
  && wineboot --init \
  && winetricks d3dx9 corefonts \
- && chown -R il2ds:il2ds "$IL2DSHOME"
+ && chown -R il2ds:il2ds /il2ds
 
 VOLUME [ \
-  "$IL2DSHOME/conf/", \
-  "$IL2DSHOME/logs/", \
-  "$IL2DSHOME/scripts/", \
-  "$IL2DSHOME/Missions/Net/" \
+  "/il2ds/conf/", \
+  "/il2ds/logs/", \
+  "/il2ds/scripts/", \
+  "/il2ds/Missions/Net/" \
 ]
 
 EXPOSE 21000/udp 20000/tcp 10000/udp
 
-USER il2ds
+WORKDIR /il2ds
 
-WORKDIR "$IL2DSHOME"
+USER il2ds
 
 CMD [ \
   "sh", "-c", \
-  "/usr/bin/wine \"$IL2DSHOME/il2server.exe\" -conf \"$IL2DSHOME/conf/confs.ini\" -cmd \"$IL2DSHOME/scripts/init.cmd\"" \
+  "/usr/bin/wine /il2ds/il2server.exe -conf \"$IL2DS_CONF\" -cmd \"$IL2DS_INIT\"" \
 ]
