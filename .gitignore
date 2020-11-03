@@ -79,8 +79,11 @@ coverage.xml
 *.mo
 *.pot
 
-# Django stuff:
+# Logs
 *.log
+logs/
+
+# Django stuff:
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
@@ -171,5 +174,8 @@ python_boilerplate/
 cookiecutter-pypackage-env/
 
 
-# downloads
+# Downloads
 patches/
+
+# Missions
+missions/
