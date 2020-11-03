@@ -249,7 +249,7 @@ cat /opt/il2ds/logs/events.log
 
 ### Connecting to Console & Device Link
 
-Even if server's config sets `[NET]/localHost` and `[DeviceLink]/host` to `0.0.0.0`, it will not be possible to connect to the server's Console and Device Link outside of server's containers.
+Even if the server's config sets `[NET]/localHost` and `[DeviceLink]/host` to `0.0.0.0`, it will not be possible to connect to the server's Console and Device Link outside of the server's containers.
 
 The server allows connections only from addresses/subnets specified in `[Console]/IPS` and `[DeviceLink]/IPS` config parameters for Console and Device Link respectively.
 
@@ -268,7 +268,7 @@ IPS=127.0.0.1
 
 This means that by default it's not possible to connect to Console and Device Link outside of server's containers.
 
-In order to overcome this, the server has to run in a custom network with a specific subnet. That will allow to specify the subnet in server's config.
+In order to overcome this, the server has to run in a custom network with a specific subnet. That will allow to specifying the subnet in the server's config.
 
 Add a custom network with a suitable subnet. For example, a network `il2ds` with a subnet `10.11.12.0/28`:
 
