@@ -1,6 +1,6 @@
 # docker-il2fb-ds
 
-This repository contains a definition of a Docker image with the dedicated server of «IL-2 Sturmovik: Forgotten Battles» flight simulator of version `2.04` running under 32-bit `wine` `5.0`.
+This repository contains a definition of a Docker image with the dedicated server of «IL-2 Sturmovik: Forgotten Battles» flight simulator of version `2.04` running under 32-bit `wine` `5.0`. See tags for other versions.
 
 Image is built from official server patches (see [`il2fb-ds-patches`](https://github.com/IL2HorusTeam/il2fb-ds-patches)) on top of [`il2horusteam/wine:5.0`](https://hub.docker.com/r/il2horusteam/wine).
 
