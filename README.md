@@ -28,14 +28,14 @@ The image has several arguments which can be changed during the build time:
 The image provides:
 
 * `il2ds` group.
-* `il2ds` user belonging to the `il2ds` and `wine` groups with home dir at `/il2ds`. No login shell.
-* Configured 32-bit `wine` prefix at `/il2ds/.wine32`.
+* `il2ds` user belonging to the `il2ds` and `wine` groups with home dir at `/home/il2ds`. No login shell.
+* Configured 32-bit `wine` prefix at `/home/il2ds/.wine32`.
 * Dedicated server of version `2.04` installed at `/il2ds` and running via `il2ds` user.
 * ENV variables:
 
   | Var Name       | Used by `wine`? | Default Value               | Description |
   | -------------- | --------------- | --------------------------- | ----------- |
-  | `WINEPREFIX`   | yes             | `"/il2ds/.wine32"`          | Path to `wine` configs |
+  | `WINEPREFIX`   | yes             | `"/home/il2ds/.wine32"`          | Path to `wine` configs |
   | `WINEARCH`     | yes             | `"win32"`                   | Used by `wine` tools |
   | `WINEDEBUG`    | yes             | `"-all"`                    | Disables `wine` warnings |
   | `IL2DS_CONF`   | no              | `"/il2ds/conf/confs.ini"`   | Path to `il2ds` config to use |
