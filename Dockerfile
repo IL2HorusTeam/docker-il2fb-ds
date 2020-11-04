@@ -42,14 +42,11 @@ VOLUME [ \
 
 EXPOSE 21000/udp 20000/tcp 10000/udp
 
-WORKDIR /il2ds
 
-USER il2ds
-
-CMD [ \
-  "sh", "-c", \
-  "/usr/bin/wine /il2ds/il2server.exe -conf \"$IL2DS_CONF\" -cmd \"$IL2DS_INIT\"" \
-]
+FROM alpine AS download-2.04
+RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/2.04/server-2.04.zip \
+ && mkdir /il2ds \
+ && unzip server-2.04.zip -d /il2ds
 
 
 FROM alpine AS build
@@ -57,18 +54,10 @@ FROM alpine AS build
 ARG IL2DS_UID
 ARG IL2DS_GID
 
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/2.04/server-2.04.zip \
- && mkdir /il2ds \
- && unzip server-2.04.zip -d /il2ds \
- && rm -f \
-      /il2ds/confc.ini \
-      /il2ds/confs.ini \
-      /il2ds/gc.cmd \
-      /il2ds/server.cmd \
- && mkdir \
-      /il2ds/logs \
-      /il2ds/conf \
-      /il2ds/scripts
+COPY --from=download-2.04 --chown=$IL2DS_UID:$IL2DS_GID /il2ds /il2ds
+
+RUN rm -f /il2ds/confc.ini /il2ds/confs.ini /il2ds/gc.cmd /il2ds/server.cmd \
+ && mkdir /il2ds/logs /il2ds/conf /il2ds/scripts
 
 COPY conf/*    /il2ds/conf/
 COPY scripts/* /il2ds/scripts/
@@ -82,3 +71,12 @@ LABEL org.opencontainers.image.version="2.04"
 LABEL org.opencontainers.image.source="https://github.com/IL2HorusTeam/il2fb-ds-docker/tree/2.04/"
 
 COPY --from=build --chown=il2ds:il2ds /il2ds /il2ds
+
+USER il2ds
+
+WORKDIR /il2ds
+
+CMD [ \
+  "sh", "-c", \
+  "/usr/bin/wine /il2ds/il2server.exe -conf \"$IL2DS_CONF\" -cmd \"$IL2DS_INIT\"" \
+]
