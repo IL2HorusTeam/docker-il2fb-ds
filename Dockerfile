@@ -181,6 +181,12 @@ RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.13
  && unzip server-4.13.3.zip -d /il2ds
 
 
+FROM alpine AS download-4.13.4
+RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.13.4/server-4.13.4.zip \
+ && mkdir /il2ds \
+ && unzip server-4.13.4.zip -d /il2ds
+
+
 FROM alpine AS build
 
 ARG IL2DS_UID
@@ -209,6 +215,7 @@ COPY --from=download-4.13   /il2ds /il2ds
 COPY --from=download-4.13.1 /il2ds /il2ds
 COPY --from=download-4.13.2 /il2ds /il2ds
 COPY --from=download-4.13.3 /il2ds /il2ds
+COPY --from=download-4.13.4 /il2ds /il2ds
 
 RUN rm -f /il2ds/confc.ini /il2ds/confs.ini /il2ds/gc.cmd /il2ds/server.cmd \
  && mkdir /il2ds/logs /il2ds/conf /il2ds/scripts
@@ -221,8 +228,8 @@ RUN chown -R $IL2DS_UID:$IL2DS_GID /il2ds
 
 FROM base
 
-LABEL org.opencontainers.image.version="4.13.3"
-LABEL org.opencontainers.image.source="https://github.com/IL2HorusTeam/il2fb-ds-docker/tree/4.13.3/"
+LABEL org.opencontainers.image.version="4.13.4"
+LABEL org.opencontainers.image.source="https://github.com/IL2HorusTeam/il2fb-ds-docker/tree/4.13.4/"
 
 COPY --from=build --chown=il2ds:il2ds /il2ds /il2ds
 
