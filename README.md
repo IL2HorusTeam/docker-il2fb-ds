@@ -40,7 +40,7 @@ The image provides:
   | `WINEDEBUG`          | yes             | `"-all"`                    | Disables `wine` warnings |
   | `IL2DS_CONF`         | no              | `"/il2ds/conf/confs.ini"`   | Path to `il2ds` config to use |
   | `IL2DS_INIT`         | no              | `"/il2ds/scripts/init.cmd"` | Path to `il2ds` initialization script |
-  | `IL2DS_JAVA_HEAP_MB` | no              | `256`                       | Size of Java Heap in megabytes, one of: `<256|384|512|768|1024>` |
+  | `IL2DS_JAVA_HEAP_MB` | no              | `256`                       | Size of Java Heap in megabytes |
 
 * Exposed ports:
 
