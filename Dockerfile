@@ -44,147 +44,178 @@ EXPOSE 21000/udp 20000/tcp 10000/udp
 
 
 FROM alpine AS download-2.04
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/2.04/server-2.04.zip \
+RUN wget -O server.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/2.04/server-2.04.zip \
  && mkdir /il2ds \
- && unzip server-2.04.zip -d /il2ds
+ && unzip server.zip -d /il2ds \
+ && rm -f server.zip
 
 
 FROM alpine AS download-3.03
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/3.03/server-3.03.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/3.03/server-3.03.zip \
  && mkdir /il2ds \
- && unzip server-3.03.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-3.04
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/3.04/server-3.04.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/3.04/server-3.04.zip \
  && mkdir /il2ds \
- && unzip server-3.04.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.01
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.01/server-4.01.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.01/server-4.01.zip \
  && mkdir /il2ds \
- && unzip server-4.01.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.02
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.02/server-4.02.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.02/server-4.02.zip \
  && mkdir /il2ds \
- && unzip server-4.02.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.03
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.03/server-4.03.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.03/server-4.03.zip \
  && mkdir /il2ds \
- && unzip server-4.03.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.04
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.04/server-4.04.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.04/server-4.04.zip \
  && mkdir /il2ds \
- && unzip server-4.04.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.05
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.05/server-4.05.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.05/server-4.05.zip \
  && mkdir /il2ds \
- && unzip server-4.05.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.06
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.06/server-4.06.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.06/server-4.06.zip \
  && mkdir /il2ds \
- && unzip server-4.06.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.07
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.07/server-4.07.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.07/server-4.07.zip \
  && mkdir /il2ds \
- && unzip server-4.07.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.08
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.08/server-4.08.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.08/server-4.08.zip \
  && mkdir /il2ds \
- && unzip server-4.08.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.09
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.09/server-4.09.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.09/server-4.09.zip \
  && mkdir /il2ds \
- && unzip server-4.09.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.10
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.10/server-4.10.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.10/server-4.10.zip \
  && mkdir /il2ds \
- && unzip server-4.10.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.10.1
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.10.1/server-4.10.1.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.10.1/server-4.10.1.zip \
  && mkdir /il2ds \
- && unzip server-4.10.1.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.11
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.11/server-4.11.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.11/server-4.11.zip \
  && mkdir /il2ds \
- && unzip server-4.11.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.11.1
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.11.1/server-4.11.1.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.11.1/server-4.11.1.zip \
  && mkdir /il2ds \
- && unzip server-4.11.1.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.12
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.12/server-4.12.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.12/server-4.12.zip \
  && mkdir /il2ds \
- && unzip server-4.12.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.12.1
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.12.1/server-4.12.1.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.12.1/server-4.12.1.zip \
  && mkdir /il2ds \
- && unzip server-4.12.1.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.12.2
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.12.2/server-4.12.2.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.12.2/server-4.12.2.zip \
  && mkdir /il2ds \
- && unzip server-4.12.2.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.13
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.13/server-4.13.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.13/server-4.13.zip \
  && mkdir /il2ds \
- && unzip server-4.13.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.13.1
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.13.1/server-4.13.1.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.13.1/server-4.13.1.zip \
  && mkdir /il2ds \
- && unzip server-4.13.1.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.13.2
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.13.2/server-4.13.2.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.13.2/server-4.13.2.zip \
  && mkdir /il2ds \
- && unzip server-4.13.2.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.13.3
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.13.3/server-4.13.3.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.13.3/server-4.13.3.zip \
  && mkdir /il2ds \
- && unzip server-4.13.3.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS download-4.13.4
-RUN wget https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.13.4/server-4.13.4.zip \
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.13.4/server-4.13.4.zip \
  && mkdir /il2ds \
- && unzip server-4.13.4.zip -d /il2ds
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
+
+
+FROM alpine AS download-4.14
+RUN wget -O patch.zip https://github.com/IL2HorusTeam/il2fb-ds-patches/releases/download/4.14/server-4.14.zip \
+ && mkdir /il2ds \
+ && unzip patch.zip -d /il2ds \
+ && rm -f patch.zip
 
 
 FROM alpine AS build
@@ -216,28 +247,31 @@ COPY --from=download-4.13.1 /il2ds /il2ds
 COPY --from=download-4.13.2 /il2ds /il2ds
 COPY --from=download-4.13.3 /il2ds /il2ds
 COPY --from=download-4.13.4 /il2ds /il2ds
+COPY --from=download-4.14   /il2ds /il2ds
 
 RUN rm -f /il2ds/confc.ini /il2ds/confs.ini /il2ds/gc.cmd /il2ds/server.cmd \
- && mkdir /il2ds/logs /il2ds/conf /il2ds/scripts
+ && mkdir /il2ds/logs /il2ds/conf /il2ds/scripts \
+ && rm -f /il2ds/il2sconsole.exe /il2ds/il2server_new.exe /il2ds/il2wconsole.exe
 
 COPY conf/*    /il2ds/conf/
 COPY scripts/* /il2ds/scripts/
+COPY il2server.sh /il2ds/il2server.sh
 
-RUN chown -R $IL2DS_UID:$IL2DS_GID /il2ds
+RUN chown -R $IL2DS_UID:$IL2DS_GID /il2ds \
+ && chmod 744 /il2ds/il2server.sh
 
 
 FROM base
 
-LABEL org.opencontainers.image.version="4.13.4"
-LABEL org.opencontainers.image.source="https://github.com/IL2HorusTeam/il2fb-ds-docker/tree/4.13.4/"
+LABEL org.opencontainers.image.version="4.14"
+LABEL org.opencontainers.image.source="https://github.com/IL2HorusTeam/il2fb-ds-docker/tree/4.14/"
 
-COPY --from=build --chown=il2ds:il2ds /il2ds /il2ds
+ENV IL2DS_JAVA_HEAP_MB=256
+
+COPY --from=build /il2ds /il2ds
 
 USER il2ds
 
 WORKDIR /il2ds
 
-CMD [ \
-  "sh", "-c", \
-  "/usr/bin/wine /il2ds/il2server.exe -conf \"$IL2DS_CONF\" -cmd \"$IL2DS_INIT\"" \
-]
+CMD /il2ds/il2server.sh

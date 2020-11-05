@@ -1,6 +1,6 @@
 # docker-il2fb-ds
 
-This repository contains a definition of a Docker image with the dedicated server of «IL-2 Sturmovik: Forgotten Battles» flight simulator of version `4.13.4` running under 32-bit `wine` `5.0`. See tags for other versions.
+This repository contains a definition of a Docker image with the dedicated server of «IL-2 Sturmovik: Forgotten Battles» flight simulator of version `4.14` running under 32-bit `wine` `5.0`. See tags for other versions.
 
 Image is built from official server patches (see [`il2fb-ds-patches`](https://github.com/IL2HorusTeam/il2fb-ds-patches)) on top of [`il2horusteam/wine:5.0`](https://hub.docker.com/r/il2horusteam/wine).
 
@@ -30,16 +30,17 @@ The image provides:
 * `il2ds` group.
 * `il2ds` user belonging to the `il2ds` and `wine` groups with home dir at `/home/il2ds`. No login shell.
 * Configured 32-bit `wine` prefix at `/home/il2ds/.wine32`.
-* Dedicated server of version `4.13.4` installed at `/il2ds` and running via `il2ds` user.
+* Dedicated server of version `4.14` installed at `/il2ds` and running via `il2ds` user.
 * ENV variables:
 
-  | Var Name       | Used by `wine`? | Default Value               | Description |
-  | -------------- | --------------- | --------------------------- | ----------- |
-  | `WINEPREFIX`   | yes             | `"/home/il2ds/.wine32"`          | Path to `wine` configs |
-  | `WINEARCH`     | yes             | `"win32"`                   | Used by `wine` tools |
-  | `WINEDEBUG`    | yes             | `"-all"`                    | Disables `wine` warnings |
-  | `IL2DS_CONF`   | no              | `"/il2ds/conf/confs.ini"`   | Path to `il2ds` config to use |
-  | `IL2DS_INIT`   | no              | `"/il2ds/scripts/init.cmd"` | Path to `il2ds` initialization script |
+  | Var Name             | Used by `wine`? | Default Value               | Description |
+  | -------------------- | --------------- | --------------------------- | ----------- |
+  | `WINEPREFIX`         | yes             | `"/home/il2ds/.wine32"`     | Path to `wine` configs |
+  | `WINEARCH`           | yes             | `"win32"`                   | Used by `wine` tools |
+  | `WINEDEBUG`          | yes             | `"-all"`                    | Disables `wine` warnings |
+  | `IL2DS_CONF`         | no              | `"/il2ds/conf/confs.ini"`   | Path to `il2ds` config to use |
+  | `IL2DS_INIT`         | no              | `"/il2ds/scripts/init.cmd"` | Path to `il2ds` initialization script |
+  | `IL2DS_JAVA_HEAP_MB` | no              | `256`                       | Size of Java Heap in megabytes, one of: `<256|384|512|768|1024>` |
 
 * Exposed ports:
 
@@ -66,17 +67,17 @@ The image provides:
 The basic example with published UDP port `21000`:
 
 ``` shell
-docker run -it --rm -p 0.0.0.0:21000:21000/udp il2horusteam/il2ds:4.13.4-wine5.0
+docker run -it --rm -p 0.0.0.0:21000:21000/udp il2horusteam/il2ds:4.14-wine5.0
 ```
 
 Example output:
 
 ```
-  *** Library **** DT **** Loaded *** 102
+DT Version 1.1.0.8
 RTS Version 2.2
 Core Version 2.0
 Sound: Native library (build 1.1, target - P IV) loaded.
-IL2 FB dedicated server v4.13.4m
+IL2 FB dedicated server v4.14m
 1>f /il2ds/scripts/gc.cmd
 >GC
 Memory: total(4456448) free(437344)
@@ -103,7 +104,7 @@ For example, in case the server's configs are stored in the host's `/opt/il2ds/c
 docker run -it --rm \
   -p 0.0.0.0:21000:21000/udp \
   -v /opt/il2ds/conf:/il2ds/conf:ro \
-  il2horusteam/il2ds:4.13.4-wine5.0
+  il2horusteam/il2ds:4.14-wine5.0
 ```
 
 If there is a need to use a config file with a custom name, this can be specified via `IL2DS_CONF` env var.
@@ -115,7 +116,7 @@ docker run -it --rm \
   -p 0.0.0.0:21000:21000/udp \
   -v /opt/il2ds/conf:/il2ds/conf:ro \
   -e IL2DS_CONF=/il2ds/conf/custom_confs.ini
-  il2horusteam/il2ds:4.13.4-wine5.0
+  il2horusteam/il2ds:4.14-wine5.0
 ```
 
 
@@ -133,7 +134,7 @@ For example, in case the server's scripts are stored in the host's `/opt/il2ds/s
 docker run -it --rm \
   -p 0.0.0.0:21000:21000/udp \
   -v /opt/il2ds/scripts:/il2ds/scripts:ro \
-  il2horusteam/il2ds:4.13.4-wine5.0
+  il2horusteam/il2ds:4.14-wine5.0
 ```
 
 If there is a need to use an init file with a custom name, this can be specified via `IL2DS_INIT` env var.
@@ -145,7 +146,29 @@ docker run -it --rm \
   -p 0.0.0.0:21000:21000/udp \
   -v /opt/il2ds/scripts:/il2ds/scripts:ro \
   -e IL2DS_INIT=/il2ds/scripts/custom_init.cmd
-  il2horusteam/il2ds:4.13.4-wine5.0
+  il2horusteam/il2ds:4.14-wine5.0
+```
+
+
+# Custom Java Heap Size
+
+The server uses `256` megabytes for the Java Heap by default.
+
+It is possible to change this values to one of the following:
+
+* `256`
+* `384`
+* `512`
+* `768`
+* `1024`
+
+The value can be set via `IL2DS_JAVA_HEAP_MB` env var, for example:
+
+``` shell
+docker run -it --rm \
+  -p 0.0.0.0:21000:21000/udp \
+  -e IL2DS_JAVA_HEAP_MB=768 \
+  il2horusteam/il2ds:4.14-wine5.0
 ```
 
 
@@ -163,7 +186,7 @@ For example, in case the server's missions are stored in the host's `/opt/il2ds/
 docker run -it --rm \
   -p 0.0.0.0:21000:21000/udp \
   -v /opt/il2ds/missions:/il2ds/Missions/Net:ro \
-  il2horusteam/il2ds:4.13.4-wine5.0
+  il2horusteam/il2ds:4.14-wine5.0
 ```
 
 
@@ -205,7 +228,7 @@ Now it's possible to run the server with the mounted volume:
 docker run -it --rm \
   -p 0.0.0.0:21000:21000/udp \
   -v /opt/il2ds/logs:/il2ds/logs \
-  il2horusteam/il2ds:4.13.4-wine5.0
+  il2horusteam/il2ds:4.14-wine5.0
 ```
 
 This will make server's logs available inside of the host's `/opt/il2ds/logs` directory:
@@ -302,7 +325,7 @@ docker run -it --rm \
   -p 127.0.0.1:10000:10000/udp \
   -v /opt/il2ds/conf:/il2ds/conf:ro \
   --network il2ds \
-  il2horusteam/il2ds:4.13.4-wine5.0
+  il2horusteam/il2ds:4.14-wine5.0
 ```
 
 Check it's possible to connect to the server's Console:
@@ -341,5 +364,6 @@ docker run -it --rm \
   -v /opt/il2ds/conf:/il2ds/conf:ro \
   -v /opt/il2ds/logs:/il2ds/logs \
   --network il2ds \
-  il2horusteam/il2ds:4.13.4-wine5.0
+  -e IL2DS_JAVA_HEAP_MB=768 \
+  il2horusteam/il2ds:4.14-wine5.0
 ```
