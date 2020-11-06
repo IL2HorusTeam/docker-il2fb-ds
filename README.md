@@ -150,7 +150,7 @@ docker run -it --rm \
 ```
 
 
-# Custom Java Heap Size
+### Custom Java Heap Size
 
 The server uses `256` megabytes for the Java Heap by default.
 
